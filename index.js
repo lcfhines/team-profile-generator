@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const Employee = require("./lib/employee");
+const generateHTML = require("./dist/generateHTML");
 
 // data - questions
 
@@ -32,14 +33,14 @@ const questions = [
 // generateHTML functio needs to be created somewhere
 inquirer.prompt(questions)
 .then((response) => {
-    fs.writeFile('index.html', generateHTML(response), (err) =>
-    err ? console.error(err) : console.log('Success!'))
+    // fs.writeFile('index.html', generateHTML(response), (err) =>
+    // err ? console.error(err) : console.log('Success!'))
 })
 
 // initiliza new employee object
-const employee = new Employee();
+// const employee = new Employee();
 
-function init() {}
+// function init() {}
 
 // start 
-init();
+// init();
