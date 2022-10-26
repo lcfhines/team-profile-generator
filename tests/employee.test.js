@@ -19,7 +19,7 @@ describe("Employee Class", () => {
         it("should return the name of an employee", () => {
             const name = "Laura"
             const employee = new Employee(name);
-            expect(employee.getName()).toBe(name);
+            expect(employee.getName()).toEqual(name);
             
         })
     })
@@ -27,7 +27,7 @@ describe("Employee Class", () => {
         it("should return the ID of an employee", () => {
             const id = "123"
             const employee = new Employee("Laura", id);
-            expect(employee.getId()).toBe(id)
+            expect(employee.getId()).toEqual(id)
             
         })
     })
@@ -35,7 +35,7 @@ describe("Employee Class", () => {
         it("should return the email of an employee", () => {
             const email = "test@email.com"
             const employee = new Employee("Laura", "123", email);
-            expect(employee.getEmail()).toBe(email)
+            expect(employee.getEmail()).toEqual(email)
             
         })
     })
@@ -43,7 +43,7 @@ describe("Employee Class", () => {
         it("should return the role of an employee", () => {
             const role = "Employee"
             const employee = new Employee("Laura", "123", "test@email.com");
-            expect(employee.getRole()).toBe(role)
+            expect(employee.getRole()).toEqual(role)
             
         })
     })
