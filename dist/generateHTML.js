@@ -1,44 +1,47 @@
-// functions to return cards based on role for each object in the roster array
-const generateManager = function(manager) {
-    return `
+// function to generate the roster html
+const generateRoster = roster => {
+
+    // based on role 
+    const generateManager = manager => {
+        return `
     <div class="card text-white bg-primary mb-3 col p-3 m-2" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">${manager.name}</h5>
-            <p class="card-text">${manager.role}</p>
+            <p class="card-text">${manager.getRole()}</p>
         </div>
         <ul class="list-group list-group-flush p2">
              <li class="list-group-item text-dark">Employee ID: ${manager.id}</li>
             <li class="list-group-item text-dark">Email: ${manager.email}</li>
-            <li class="list-group-item text-dark">Office: ${manager.officeNumber}</li>
+            <li class="list-group-item text-dark">Office Number: ${manager.officeNumber}</li>
         </ul>
     </div>
     `;
     };
 
-const generateEngineer = function(engineer) {
-    return `
+
+    const generateEngineer = engineer => {
+        return `
     <div class="card text-white bg-primary mb-3 col p-3 m-2" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">${engineer.name}</h5>
-            <p class="card-text">${engineer.role}</p>
+            <p class="card-text">${engineer.getRole()}</p>
         </div>
         <ul class="list-group list-group-flush p2">
             <li class="list-group-item text-dark">Employee ID: ${engineer.id}</li>
             <li class="list-group-item text-dark">Email: ${engineer.email}</li>
-            <li class="list-group-item text-dark">Github:<a href="https://github.com/${engineer.github}">${engineer.github}</a></li>
+            <li class="list-group-item text-dark">Github: <a href="https://github.com/${engineer.github}"> ${engineer.github}</a></li>
         </ul>
     </div>
     `;
-};
+    };
 
 
-
-const generateIntern = function(intern) {
-    return `
+    const generateIntern = intern => {
+        return `
     <div class="card text-white bg-primary mb-3 col p-3 m-2" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">${intern.name}</h5>
-            <p class="card-text">${intern.role}</p>
+            <p class="card-text">${intern.getRole()}</p>
         </div>
         <ul class="list-group list-group-flush p2">
             <li class="list-group-item text-dark">Employee ID: ${intern.id}</li>
@@ -47,37 +50,30 @@ const generateIntern = function(intern) {
         </ul>
     </div>
     `;
-};
+    };
 
-generateRoster = (data) => {
+    const team = []
 
-// store cards in team 
-    team = []
+    team.push(roster
+        .filter(employee => employee.getRole() === "Manager")
+        .map(manager => generateManager(manager))
+        .join("")
+    );
+    team.push(roster
+        .filter(employee => employee.getRole() === "Engineer")
+        .map(engineer => generateEngineer(engineer))
+        .join("")
+    );
+    team.push(roster
+        .filter(employee => employee.getRole() === "Intern")
+        .map(intern => generateIntern(intern))
+        .join("")
+    );
 
-    for (let i = 0; i < data.length; i++) {
-        const employee = data[i];
-        const role = employee.role;
-
-        if (role === "Manager") {
-            const managerCard = generateManager(employee);
-            team.push(managerCard);
-        } else
-        if (role === "Engineer") {
-            const engineerCard = generateEngineer(employee);
-            team.push(engineerCard);
-        } else 
-        if (role === "Intern") {
-            const internCard = generateIntern(employee);
-            team.push(internCard);
-        }
-    }
-
-    const employeeCards = team.join('')
-    // const generatePage = generateHTML(employeeCards);
-    // return generatePage;
+    return team.join("");
 }
 
-const generateHTML = function(employeeCards) {
+module.exports = roster => {
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -97,11 +93,9 @@ const generateHTML = function(employeeCards) {
         </div>
         <div class="container">
             <div class="row">
-            ${employeeCards}
+            ${generateRoster(roster)}
             </div>
         </div>
 
     `
-}
-
-module.exports = generateHTML;
+};

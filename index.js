@@ -8,11 +8,13 @@ const Intern = require("./lib/intern");
 const generateHTML = require("./dist/generateHTML");
 
 // array to store team members
-const roster = [];
+rosterArray = [];
 
+// initilialize
 function startApp() {
 
-    function buildRoster (){
+    // prompt user with questions in terminal based on which choice they make
+    function buildRoster() {
         inquirer.prompt([
             {
                 type: "list",
@@ -21,22 +23,22 @@ function startApp() {
                 choices: ["Manager", "Engineer", "Intern"]
             }
         ])
-        .then(function(response) {
-            switch(response.role) {
-                case "Manager":
-                    addManager();
-                    break;
-                case "Engineer":
-                    addEngineer();
-                    break;
-                case "Intern":
-                    addIntern();
-                    break;
-            }
-        })
+            .then(function (response) {
+                switch (response.role) {
+                    case "Manager":
+                        addManager();
+                        break;
+                    case "Engineer":
+                        addEngineer();
+                        break;
+                    case "Intern":
+                        addIntern();
+                        break;
+                }
+            })
     }
-
-    function addToRoster (){
+    // after adding an employee, prompt user to make choice between adding another or generating the html
+    function addToRoster() {
         inquirer.prompt([
             {
                 type: "list",
@@ -45,16 +47,16 @@ function startApp() {
                 choices: ["Add another employee to the roster", "Generate the HTML"]
             }
         ])
-        .then(function(response) {
-            switch(response.next) {
-                case "Add another employee to the roster":
-                    buildRoster();
-                    break;
-                case "Generate the HTML":
-                    buildHTML();
-                    break;
-            }
-        })
+            .then(function (response) {
+                switch (response.next) {
+                    case "Add another employee to the roster":
+                        buildRoster();
+                        break;
+                    case "Generate the HTML":
+                        buildHTML();
+                        break;
+                }
+            })
     }
     // if addManager is selected
     function addManager() {
@@ -79,9 +81,10 @@ function startApp() {
                 message: "What is the manager's office number?",
                 name: "officeNumber",
             },
+        // store data in variable and add to roster array
         ]).then(response => {
             const manager = new Manager(response.name, response.id, response.email, response.officeNumber);
-            roster.push(manager);
+            rosterArray.push(manager);
             addToRoster();
         })
 
@@ -112,7 +115,7 @@ function startApp() {
             },
         ]).then(response => {
             const engineer = new Engineer(response.name, response.id, response.email, response.github);
-            roster.push(engineer);
+            rosterArray.push(engineer);
             addToRoster();
         })
 
@@ -143,15 +146,16 @@ function startApp() {
             },
         ]).then(response => {
             const intern = new Intern(response.name, response.id, response.email, response.school);
-            roster.push(intern);
+            rosterArray.push(intern);
             addToRoster();
         })
     };
 
-    function buildHTML () {
+    // run when user selects 'generate' option, write index.html file
+    function buildHTML() {
         console.log("Roster is finalized");
-        console.log(roster);
-        fs.writeFileSync("index.html", generateHTML(roster), "utf-8");
+        console.log(rosterArray);
+        fs.writeFileSync("index.html", generateHTML(rosterArray), "utf-8");
     }
 
     buildRoster();
