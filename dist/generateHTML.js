@@ -11,7 +11,7 @@ const generateRoster = roster => {
         </div>
         <ul class="list-group list-group-flush p2">
              <li class="list-group-item text-dark">Employee ID: ${manager.id}</li>
-            <li class="list-group-item text-dark">Email: ${manager.email}</li>
+            <li class="list-group-item text-dark">Email: <a href="mailto:${manager.email}> ${manager.email}</a></li>
             <li class="list-group-item text-dark">Office Number: ${manager.officeNumber}</li>
         </ul>
     </div>
@@ -28,7 +28,7 @@ const generateRoster = roster => {
         </div>
         <ul class="list-group list-group-flush p2">
             <li class="list-group-item text-dark">Employee ID: ${engineer.id}</li>
-            <li class="list-group-item text-dark">Email: ${engineer.email}</li>
+            <li class="list-group-item text-dark">Email: <a href="mailto:${engineer.email}"> ${engineer.email}</a></li>
             <li class="list-group-item text-dark">Github: <a href="https://github.com/${engineer.github}"> ${engineer.github}</a></li>
         </ul>
     </div>
@@ -45,7 +45,7 @@ const generateRoster = roster => {
         </div>
         <ul class="list-group list-group-flush p2">
             <li class="list-group-item text-dark">Employee ID: ${intern.id}</li>
-            <li class="list-group-item text-dark">Email: ${intern.email}</li>
+            <li class="list-group-item text-dark">Email: <a href="mailto:${intern.email}"> ${intern.email}</a></li>
             <li class="list-group-item text-dark">School: ${intern.school}</li>
         </ul>
     </div>
