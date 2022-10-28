@@ -38,6 +38,7 @@ The team profile generator requires installation of Node.js as well as the Inqui
 Once installations are complete, simply run `node index` in the terminal and answer the questions as prompted. This will generate an HTML file with your team's roster.  
 
 The video below demos the user flow.  
+[Team Profile Generator.webm](https://user-images.githubusercontent.com/113798073/198439380-bdd20c44-49c5-4220-ba8b-fe43094ae4f8.webm)
 
 
 
